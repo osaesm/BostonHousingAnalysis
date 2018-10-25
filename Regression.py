@@ -23,13 +23,17 @@ with open('all/train.csv', newline='') as housing_data_file:
 x_train = np.asarray(x_train)
 y_train = np.asarray(y_train)
 
+# normalizing inputs and output to 1
+for i in range(13):
+    x_train[:,i] /= max(abs(x_train[:,i]))
+
+y_train /= max(abs(y_train[:,0]))
+
 # define our model
 model = Sequential()
 model.add(Dense(units=1, activation='sigmoid', input_dim=13))
 model.compile(optimizer='sgd', loss='mse', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=1000)
+model.fit(x_train, y_train, epochs=10000)
 
 # 2 arrays: first one has weights (m in y = mx+b), second has biases (b in y = mx+b) 
 print(model.get_weights())
-
-# # print(str(w1) + '*x' + str(w2) + '*y' + str(b))

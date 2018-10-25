@@ -4,7 +4,7 @@ from pandas.tools.plotting import scatter_matrix
 
 
 f = pd.read_csv('./all/train.csv')
-#print(f)
+print(f)
 
 f.hist(bins=50, figsize=(20,15))
 plt.savefig("attribute_histogram_plots")

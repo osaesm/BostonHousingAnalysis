@@ -3,7 +3,7 @@ import keras
 import csv
 import sys
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Activation
 from keras.backend import eval
 
 # If under y = x, 0; else 1
@@ -31,9 +31,13 @@ y_train /= max(abs(y_train))
 
 # define our model
 model = Sequential()
-model.add(Dense(units=1, activation='sigmoid', input_dim=13))
+
+model.add(Dense(units=8, activation='tanh', input_dim=13))
+
+model.add(Dense(units=1, activation='tanh'))
+
 model.compile(optimizer='sgd', loss='mse', metrics=['accuracy'])
 model.fit(x_train, y_train, epochs=10000, validation_split=0.2)
 
-# 2 arrays: first one has weights (m in y = mx+b), second has biases (b in y = mx+b) 
-print(model.get_weights())
+# # 2 arrays: first one has weights (m in y = mx+b), second has biases (b in y = mx+b) 
+# print(model.get_weights())
